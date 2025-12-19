@@ -5,7 +5,9 @@ export type currentStatus = {
     model_name: string
     progress: number
     accuracy: number
-    cost: number
+    input_tokens: number,
+    output_tokens:number,
+    cost: number,
     time_taken: number
 }
 
@@ -14,6 +16,13 @@ import q from "./questions/test.json" assert { type: "json" }
 import { models } from "./constants"
 import { ModelManager } from "./ModelManager"
 
-function runTest(){
-    
+async function runTest(){
+    const listStatus:currentStatus[] = []
+    for (const model of models){
+        const m = new ModelManager(model,q)
+        const status = await m.runTest()
+        listStatus.push(status)
+        // run(listStatus)
+    }
 }
+// runTest()
