@@ -1,5 +1,5 @@
 import type { currentStatus, model, question, response } from "./types"
-import { evaluator, models, QUESTION_SET_PATH, pricings } from "./constants/index"
+import { evaluator, models, QUESTION_SET_PATH, pricings, BASE_URL } from "./constants/index"
 import { OpenAI } from "openai/client.js";
 import fs from 'fs';
 import { dirname } from "path";
@@ -11,8 +11,8 @@ const __dirname = dirname(__filename);
 
 async function clientCall(prompt:string, model: model):Promise<response>{
     const client = new OpenAI({
-        baseURL: 'https://api.tokenfactory.nebius.com/v1/',
-        apiKey: process.env.NEBIUS_API_KEY,
+        baseURL: BASE_URL,
+        apiKey: process.env.NEBIUS_API_KEY || process.env.OPENAI_API_KEY,
     });
     const c1 = performance.now()
     const res = await client.chat.completions.create({

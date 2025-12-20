@@ -1,4 +1,4 @@
-import { QUESTION_SET_PATH, questionMaker, TOPIC } from "./constants/index.ts"
+import { BASE_URL, QUESTION_SET_PATH, questionMaker, TOPIC } from "./constants/index.ts"
 import { OpenAI } from "openai/client.js";
 import { z } from "zod";
 import fs from 'fs';
@@ -22,8 +22,8 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
     }
 
     const client = new OpenAI({
-        baseURL: 'https://api.tokenfactory.nebius.com/v1/',
-        apiKey: process.env.NEBIUS_API_KEY,
+        baseURL: BASE_URL,
+        apiKey: process.env.NEBIUS_API_KEY || process.env.OPENAI_API_KEY,
     });
 
     const Question = z.object({
