@@ -1,7 +1,5 @@
 import type { currentStatus, model, question, response } from "./types"
 import { evaluator } from "./constants"
-import qusetionSet from "./questions/test.json" assert { type: "json" }
-import { models } from "./constants";
 import { OpenAI } from "openai/client.js";
 import fs from 'fs';
 import { pricings } from './constants'
@@ -36,7 +34,7 @@ async function clientCall(prompt:string, model: model):Promise<response>{
         answer : res.choices[0]?.message.content ?? "",
         cost : res.usage?.total_tokens ?? 0,
         input_tokens: res.usage?.prompt_tokens ?? 0,
-        output_tokens: res.usage?.completion_tokens ?? 0,
+        output_tokens: (res.usage?.total_tokens ?? 0) - (res.usage?.prompt_tokens ?? 0),
         time_taken: c2-c1
     }
 }
@@ -120,7 +118,9 @@ Score - ${correctness}
             answers: [...question.answers].map(a => a.trim().toLowerCase()).sort(),
             negative_answers: (question.negative_answers ?? []).map(a => a.trim().toLowerCase()).sort()
         });
-        return Buffer.from(normalized).toString('base64url').slice(0, 16);
+        const hasher = new Bun.CryptoHasher("md5");
+        hasher.update(normalized);
+        return hasher.digest("hex").slice(0, 16);
     }
 
     writeCache(question: question, result: { answer: string; input_tokens: number; output_tokens: number; cost: number; time_taken: number }, evaluationScore: number) {
@@ -151,7 +151,7 @@ Score - ${correctness}
         fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), "utf8");
     }
 
-    async runTest(){
+    async *runTest(): AsyncGenerator<currentStatus> {
         for (const q of this.questions){
             //check
             const cached = this.checkCache(q);
@@ -182,11 +182,14 @@ Score - ${correctness}
                 cost: Number(this.status.cost + (res.cost ?? 0)),
                 input_tokens: this.status.input_tokens + (res.input_tokens ?? 0),
                 output_tokens: this.status.output_tokens + (res.output_tokens ?? 0),
-                time_taken: res.time_taken
+                time_taken: res.time_taken,
+                pending: false
             };
             this.logger(q, res.answer ?? "", correctness);
+            yield {...this.status};
         }
-        return this.status;
+
+        // return this.status;
     }
 }
 

@@ -22,9 +22,13 @@ async function runTest(){
     for (let i = 0; i < models.length; i++) {
         const model = models[i]!
         const m = new ModelManager(model, q)
-        const status = await m.runTest()
-        listStatus[i] = { ...status, pending: false }
-        run(listStatus)
+        // const status = await m.runTest()
+        for await (const status of m.runTest()) {
+            listStatus[i] = { ...status, pending: false }
+            run(listStatus)
+        }
+        // listStatus[i] = { ...status, pending: false }
+        // run(listStatus)
     }
 }
 runTest()

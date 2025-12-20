@@ -73,6 +73,12 @@ export const pricings = [
     outputPricePerM: 2.40
   },
   {
+    name: "Kimi-K2-Thinking",
+    flavor: "base",
+    inputPricePerM: 0.60,
+    outputPricePerM: 2.50
+  },
+  {
     name: "Qwen/Qwen3-Coder-480B-A35B-Instruct",
     flavor: "base",
     inputPricePerM: 0.40,

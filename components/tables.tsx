@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, render, Text } from 'ink';
 import type { currentStatus } from '../types';
+import q from '../questions/test.json' assert { type: "json" }
 
 const Col = ({ children, width, align, color }: { children: React.ReactNode; width?: number; align?: 'flex-start' | 'center' | 'flex-end'; color?: 'cyan' | 'green' | 'red' | 'yellow' | 'blue' | 'magenta' | 'white' | 'black' | 'gray' | 'grey' | 'purple' | 'pink' | 'brown' | 'orange' | 'teal' | 'lime' | 'indigo' | 'violet' | 'maroon' | 'navy' | 'olive' | 'coral' | 'salmon' | 'turquoise' | 'gold' | 'silver' | 'bronze' | 'indigo' | 'purple' | 'pink' | 'brown' | 'orange' | 'teal' | 'lime' | 'indigo' | 'violet' | 'maroon' | 'navy' | 'olive' | 'coral' | 'salmon' | 'turquoise' | 'gold' | 'silver' | 'bronze' }) => (
   <Box width={width} flexGrow={width ? 0 : 1} paddingRight={2} justifyContent={align ? align : 'center'}>
@@ -39,12 +40,12 @@ export const TableProvider = ({ models }: { models: currentStatus[] }) => {
             </>
           ) : (
             <>
-              <Col width={10}>{m.progress}%</Col>
+              <Col width={10}>{m.progress*q.length/100}/{q.length}</Col>
               <Col width={10}>{m.accuracy.toFixed(1)}%</Col>
               <Col color="cyan" width={12}>${m.cost.toFixed(4)}</Col>
               <Col width={14}>{m.input_tokens.toLocaleString()}</Col>
               <Col width={14}>{m.output_tokens.toLocaleString()}</Col>
-              <Col width={10}>{m.time_taken.toFixed(1)}ms</Col>
+              <Col width={10}>{(m.time_taken/1000).toFixed(1)}s</Col>
             </>
           )}
         </Box>
@@ -57,7 +58,7 @@ export const TableProvider = ({ models }: { models: currentStatus[] }) => {
         <Col color="cyan" width={12}>${models.filter(m=>!m.pending).reduce((va,m)=>va+m.cost,0).toFixed(4)}</Col>
         <Col width={14}>{models.filter(m=>!m.pending).reduce((va,m)=>va+m.input_tokens,0).toLocaleString()}</Col>
         <Col width={14}>{models.filter(m=>!m.pending).reduce((va,m)=>va+m.output_tokens,0).toLocaleString()}</Col>
-        <Col width={10}>{models.filter(m=>!m.pending).reduce((va,m)=>va+m.time_taken,0).toFixed(1)}ms</Col>
+        <Col width={10}>{(models.filter(m=>!m.pending).reduce((va,m)=>va+m.time_taken,0)/1000).toFixed(1)}s</Col>
       </Box>
     </Box>
   );
