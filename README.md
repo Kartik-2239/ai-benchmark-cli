@@ -51,7 +51,8 @@ bun run start --create
 
 ## Configure
 
-- **Models**: edit `constants.ts` (`models`)
+- **Models**: edit `constants/index.ts` (`models`)
+- **Provider**: configure `.env` and `constants/index.ts` (`BASE_URL`) according to your provider.
 - **Questions**: edit/add `questions/test.json`
 - **Logs**: written to `logs/<model-name>.log`
 
