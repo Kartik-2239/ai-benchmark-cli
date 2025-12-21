@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 async function clientCall(prompt:string, model: model):Promise<response>{
     const client = new OpenAI({
         baseURL: BASE_URL,
-        apiKey: process.env.OPENROUTER_API_KEY ||process.env.NEBIUS_API_KEY,
+        apiKey: process.env.NEBIUS_API_KEY //|| process.env.OPENROUTER_API_KEY,
     });
     const c1 = performance.now()
     const res = await client.chat.completions.create({
@@ -103,11 +103,14 @@ Score - ${correctness}
     }
 
     checkCache(question: question) {
-        const cacheDir = `${__dirname}/cache`;
-        const cacheFile = `${cacheDir}/cache.json`;
+        const cacheDir = `${__dirname}/../cache`;
+        const cacheFile = `${cacheDir}/cache-${this.getQuestionSetHash()}.json`;
         
         if (!fs.existsSync(cacheFile)) return null;
         const cache = JSON.parse(fs.readFileSync(cacheFile, "utf8"));
+        if (cache.questionSetId !== QUESTION_SET_PATH || cache.questionSetHash !== this.getQuestionSetHash()) {
+            return null;
+        }
         const key = `${this.model.name}::${this.hashQuestion(question)}`;
         return cache.entries[key] ?? null;
     }
@@ -122,13 +125,19 @@ Score - ${correctness}
         hasher.update(normalized);
         return hasher.digest("hex").slice(0, 16);
     }
+    getQuestionSetHash(): string {
+        const content = fs.readFileSync(QUESTION_SET_PATH, "utf8");
+        const hasher = new Bun.CryptoHasher("sha1");
+        hasher.update(content);
+        return hasher.digest("hex");
+    }
 
     writeCache(question: question, result: { answer: string; input_tokens: number; output_tokens: number; cost: number; time_taken: number }, evaluationScore: number) {
-        const cacheDir = "/Users/kartikkannan/Desktop/benchmark/benchmark-cli/cache";
+        const cacheDir = `${__dirname}/../cache`;
         if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
 
-        const cacheFile = `${cacheDir}/cache.json`;
-        let cache = { cacheVersion: 1, entries: {} as Record<string, any> };
+        const cacheFile = `${cacheDir}/cache-${this.getQuestionSetHash()}.json`;
+        let cache = { cacheVersion: 1, questionSetId: QUESTION_SET_PATH, questionSetHash: this.getQuestionSetHash(), entries: {} as Record<string, any> };
 
         if (fs.existsSync(cacheFile)) {
             cache = JSON.parse(fs.readFileSync(cacheFile, "utf8"));
@@ -206,7 +215,7 @@ export async function runTest(){
     
     run(listStatus)
     
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < models.length; i++) {
         const model = models[i]!
         if (!fs.existsSync(QUESTION_SET_PATH)){
             console.log("Question set already exists");
@@ -215,8 +224,10 @@ export async function runTest(){
         const q = JSON.parse(fs.readFileSync(QUESTION_SET_PATH, "utf8"))
         const m = new ModelManager(model, q)
         // const status = await m.runTest()
+        var total_time = 0;
         for await (const status of m.runTest()) {
-            listStatus[i] = { ...status, pending: false }
+            total_time += status.time_taken;
+            listStatus[i] = { ...status, pending: false, time_taken: total_time }
             run(listStatus)
         }
         // listStatus[i] = { ...status, pending: false }

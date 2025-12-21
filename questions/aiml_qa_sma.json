@@ -1,0 +1,47 @@
+[
+    {
+        "question": "How do machine learning models learn from data?",
+        "answers": [
+            "by finding mathematical relationships between input and output data through training",
+            "by adjusting model parameters using backpropagation and gradient descent",
+            "by learning patterns from labeled or unlabeled examples in the training dataset",
+            "by minimizing the loss function which measures the error between predictions and true labels"
+        ],
+        "negative_answers": [
+            "by explicitly programming all rules for every scenario",
+            "by copying patterns directly from memory without learning relationships",
+            "by random guessing without any systematic optimization",
+            "by memorizing every single example exactly as it appears"
+        ]
+    },
+    {
+        "question": "What is the role of activation functions in neural networks?",
+        "answers": [
+            "they introduce non-linearity to allow networks to learn complex patterns",
+            "they enable deeper networks by preventing vanishing/exploding gradients",
+            "they transform linear combinations into non-linear outputs",
+            "ReLU is popular because it avoids the vanishing gradient problem"
+        ],
+        "negative_answers": [
+            "they make linear models more powerful without changing their properties",
+            "they are only needed for the output layer",
+            "they replace the need for multiple layers in neural networks",
+            "sigmoid and tanh are always better than ReLU for all tasks"
+        ]
+    },
+    {
+        "question": "How does backpropagation work in neural networks?",
+        "answers": [
+            "it propagates errors backward through the network layer by layer",
+            "it computes gradients of the loss function with respect to each parameter using the chain rule",
+            "it enables efficient gradient calculation for optimization",
+            "it uses the computed gradients to update weights via gradient descent"
+        ],
+        "negative_answers": [
+            "it trains the network by randomly adjusting weights",
+            "it only works for the last layer of the network",
+            "it requires calculating gradients for each sample separately without optimization",
+            "it is the same as forward propagation done in reverse"
+        ]
+    }
+]

@@ -42,7 +42,7 @@ export const TableProvider = ({ models }: { models: currentStatus[] }) => {
             </>
           ) : (
             <>
-              <Col width={10}>{m.progress*q.length/100}/{q.length}</Col>
+              <Col width={10}>{Math.round(m.progress*q.length/100)}/{q.length}</Col>
               <Col width={10}>{m.accuracy.toFixed(1)}%</Col>
               <Col color="cyan" width={12}>${m.cost.toFixed(4)}</Col>
               <Col width={14}>{m.input_tokens.toLocaleString()}</Col>

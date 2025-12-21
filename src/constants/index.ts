@@ -1,30 +1,30 @@
 import type { model } from "../types"
 
-export const QUESTION_SET_PATH = "./questions/test.json";
-export const TOPIC = "AI";
+export const QUESTION_SET_PATH = "./questions/aiml_qa_sma.json";
+// export const TOPIC = "AI";
 export const BASE_URL = "https://api.tokenfactory.nebius.com/v1/";
 // export const BASE_URL = "https://openrouter.ai/api/v1";
 
 
 export const evaluator : model = {
     id: 1,
-    name: "nemotron-3-nano-30b-a3b:free",
-    model: "nvidia/nemotron-3-nano-30b-a3b:free",
+    name: "Kimi-K2-Instruct",
+    model: "moonshotai/Kimi-K2-Instruct",
     reasoning: true
 }
 
 export const questionMaker:model = {
     id: 1,
-    name: "nemotron-3-nano-30b-a3b:free",
-    model: "nvidia/nemotron-3-nano-30b-a3b:free",
+    name: "Kimi-K2-Instruct",
+    model: "moonshotai/Kimi-K2-Instruct",
     reasoning: true
 }
 
 export var models : model[] = [
     {
         id: 1,
-        name: "nemotron-3-nano-30b-a3b:free",
-        model: "nvidia/nemotron-3-nano-30b-a3b:free",
+        name: "gpt-oss-120b",
+        model: "openai/gpt-oss-120b",
         reasoning: true
     },
     {
@@ -56,7 +56,25 @@ export var models : model[] = [
         name: "DeepSeek-R1-0528",
         model: "deepseek-ai/DeepSeek-R1-0528",
         reasoning: true,
-    }
+    },
+    {
+        id: 7,
+        name: "Qwen3-235B-A22B-Thinking-2507",
+        model: "Qwen/Qwen3-235B-A22B-Thinking-2507",
+        reasoning: true,
+    },
+    {
+        id: 8,
+        name: "DeepSeek-V3-0324",
+        model: "deepseek-ai/DeepSeek-V3-0324",
+        reasoning: true,
+    },
+    {
+        id: 9,
+        name: "GLM-4.5-Air",
+        model: "zai-org/GLM-4.5-Air",
+        reasoning: true,
+    },
 ]
 
 export const pricings = [

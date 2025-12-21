@@ -34,12 +34,6 @@ bun run start --create
 ## Configure
 
 - **Models**: edit `constants.ts` (`models`)
-- **Questions**: edit `questions/test.json`
+- **Questions**: edit/add `questions/test.json`
 - **Logs**: written to `logs/<model-name>.log`
 
-## Install as a command (optional)
-
-```bash
-bun link
-benchmark-cli
-```

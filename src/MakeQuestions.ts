@@ -1,4 +1,4 @@
-import { BASE_URL, QUESTION_SET_PATH, questionMaker, TOPIC } from "./constants/index.ts"
+import { BASE_URL, QUESTION_SET_PATH, questionMaker } from "./constants/index.ts"
 import { OpenAI } from "openai/client.js";
 import { z } from "zod";
 import fs from 'fs';
@@ -10,9 +10,6 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
         console.log("Question set already exists");
         return;
     }
-    if (!topic){
-        topic = TOPIC;
-    }
     if (!numberOfQuestions){
         numberOfQuestions = 20;
     }
@@ -23,7 +20,7 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
 
     const client = new OpenAI({
         baseURL: BASE_URL,
-        apiKey: process.env.NEBIUS_API_KEY || process.env.OPENROUTER_API_KEY,
+        apiKey: process.env.NEBIUS_API_KEY //|| process.env.OPENROUTER_API_KEY,
     });
 
     const Question = z.object({
@@ -34,7 +31,8 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
         }))
     });
 
-
+    // console.log(`Generating ${numberOfQuestions} questions for the topic: ${topic}`);
+    // console.log(`Using model: ${questionMaker.model}`);
     const response = await client.chat.completions.create({
     model: questionMaker.model,
     messages: [
