@@ -11,6 +11,11 @@ export NEBIUS_API_KEY="..."
 export OPENROUTER_API_KEY="..."
 ```
 
+## Images
+![cli-table](/benchmark-cli/assets/cli-table.png)
+![web-graph](/benchmark-cli/assets/web-graph.png)
+
+
 ## Usage
 
 ```bash
