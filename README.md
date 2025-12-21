@@ -12,8 +12,8 @@ export OPENROUTER_API_KEY="..."
 ```
 
 ## Images
-![cli-table](/benchmark-cli/assets/cli-table.png)
-![web-graph](/benchmark-cli/assets/web-graph.png)
+![cli-table](/assets/cli-table.png)
+![web-graph](/assets/web-graph.png)
 
 
 ## Usage
