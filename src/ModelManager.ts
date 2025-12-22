@@ -60,8 +60,13 @@ export class ModelManager {
     } 
 
     async callEvaluator(question:question, answer: string){
-        const prompt = `Evaluate the question object using answers and negative answers and the answer provided, give a rating of 0-100
-                    object - [${JSON.stringify(question)}] and the Answer to evaluate is - [${answer}], give only and only the number no full stop at the end either`
+        const prompt = `Evaluate the question object using answers and negative answers and the answer provided, give a rating of 0-100.
+                        negative answers reduce points and positive answers increase points.
+                        the question is - [${question.question}],
+                        the answers are - [${question.answers}],
+                        the negative answers are - [${question.negative_answers}],
+                        the answer to evaluate is - [${answer}],
+                        give only and only the number no full stop at the end either`
         const response = await clientCall(prompt, evaluator)
         const number = Number(response.answer)
         if (Number.isNaN(number)){

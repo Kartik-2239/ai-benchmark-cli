@@ -5,6 +5,7 @@ import fs from 'fs';
 import { dirname } from 'path';
 import { DOCS_PATH } from "./constants/index.ts";
 import { PDFParse } from 'pdf-parse';
+import { zodTextFormat } from "openai/helpers/zod.js";
 
 
 
@@ -41,29 +42,33 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number, 
     model: questionMaker.model,
     messages: [
         { 
-        role: "system", 
-        content: "You are a helpful assistant that generates questions and answers. Always respond with valid JSON only, no markdown formatting or code blocks." 
+            role: "system", 
+            content:`You are a helpful assistant that generates questions and answers. 
+                    Always respond with valid JSON only, no markdown formatting or code blocks.
+                    You are an expert at curating questions which are relevant to the topic and context.
+                    The questions you make have specific answers and specific negative answers instead of being vague and subjective.`
         },
         {
-        role: "user",
-        content: `Generate a list of ${numberOfQuestions} questions and answers for the topic: ${topic}
-        . The questions should be based on the following context: ${data} 
-        Description of the questions should be like: ${description},
-        
-        Respond with a JSON object matching this schema:
-        {
-        "questions": [
+            role: "user",
+            content: `Generate a list of ${numberOfQuestions} questions and answers for the topic: ${topic}
+            . The questions should be based on the following context: ${data} 
+            Description of the questions should be like: ${description},
+            
+            Respond with a JSON object matching this schema:
             {
-            "question": "string",
-            "answers": ["string"],
-            "negative_answers": ["string"]
-            }
-        ]
-        }`,
+                "questions": [
+                    {
+                    "question": "string",
+                    "answers": ["string"],
+                    "negative_answers": ["string"]
+                    }
+                ]
+            }`,
         },
     ],
-    response_format: { type: "json_object" },
-    });
+    response_format: { type: "json_schema", json_schema: zodTextFormat(Question, "question") },
+    })
+    ;
 
     const content = response.choices[0]?.message.content ?? "{}";
     const parsed = JSON.parse(content);
