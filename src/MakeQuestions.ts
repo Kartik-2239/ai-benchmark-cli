@@ -8,7 +8,7 @@ import { PDFParse } from 'pdf-parse';
 
 
 
-export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
+export async function MakeQuestions(topic?: string, numberOfQuestions?: number, description?: string){
     if (fs.existsSync(QUESTION_SET_PATH)){
         console.log("Question set already exists");
         return;
@@ -48,17 +48,18 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number){
         role: "user",
         content: `Generate a list of ${numberOfQuestions} questions and answers for the topic: ${topic}
         . The questions should be based on the following context: ${data} 
-
-    Respond with a JSON object matching this schema:
-    {
-    "questions": [
+        Description of the questions should be like: ${description},
+        
+        Respond with a JSON object matching this schema:
         {
-        "question": "string",
-        "answers": ["string"],
-        "negative_answers": ["string"]
-        }
-    ]
-    }`,
+        "questions": [
+            {
+            "question": "string",
+            "answers": ["string"],
+            "negative_answers": ["string"]
+            }
+        ]
+        }`,
         },
     ],
     response_format: { type: "json_object" },

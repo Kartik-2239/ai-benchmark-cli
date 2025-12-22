@@ -9,18 +9,19 @@ export const DOCS_PATH = "./docs";
 
 export const evaluator : model = {
     id: 1,
-    name: "Kimi-K2-Thinking",
-    model: "moonshotai/Kimi-K2-Thinking",
+    name: "Kimi-K2-Instruct",
+    model: "moonshotai/Kimi-K2-Instruct",
     reasoning: true
 }
 
 // choose a model with high context window
 export const questionMaker:model = {
     id: 1,
-    name: "Kimi-K2-Instruct",
-    model: "moonshotai/Kimi-K2-Instruct",
+    name: "Kimi-K2-Thinking",
+    model: "moonshotai/Kimi-K2-Thinking",
     reasoning: true
 }
+
 
 export var models : model[] = [
     {
