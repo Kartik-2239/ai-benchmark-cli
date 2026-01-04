@@ -1,0 +1,38 @@
+[
+  {
+    "question": "In the Wano Country Arc, what is the name of the floating island fortress that Zoro helps prevent from crashing onto the Flower Capital?",
+    "answers": [
+      "Onigashima"
+    ],
+    "negative_answers": [
+      "Marineford",
+      "Enies Lobby",
+      "Impel Down"
+    ]
+  },
+  {
+    "question": "Which member of the Beasts Pirates' All-Stars does Zoro defeat in battle while the floating island of Onigashima is at risk of destruction?",
+    "answers": [
+      "King",
+      "King the Wildfire"
+    ],
+    "negative_answers": [
+      "Kaido",
+      "Queen the Plague",
+      "Jack the Drought"
+    ]
+  },
+  {
+    "question": "What advanced Haki technique does Zoro subconsciously use to scar Kaido during the battle to prevent Onigashima's destruction?",
+    "answers": [
+      "Conqueror's Haki infusion",
+      "Advanced Conqueror's Haki",
+      "Conqueror's Haki coating"
+    ],
+    "negative_answers": [
+      "Armament Haki: Internal Destruction",
+      "Observation Haki: Future Sight",
+      "Voice of All Things"
+    ]
+  }
+]

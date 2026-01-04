@@ -6,6 +6,7 @@ import { dirname } from 'path';
 import { DOCS_PATH } from "./constants/index.ts";
 import { PDFParse } from 'pdf-parse';
 import { zodTextFormat } from "openai/helpers/zod.js";
+import type { question } from "./types/index.ts";
 
 
 
@@ -24,7 +25,7 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number, 
 
     const client = new OpenAI({
         baseURL: BASE_URL,
-        apiKey: process.env.NEBIUS_API_KEY //|| process.env.OPENROUTER_API_KEY,
+        apiKey: process.env.NEBIUS_API_KEY
     });
 
     const Question = z.object({
@@ -35,72 +36,83 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number, 
         }))
     });
     const data = await readDocs();
-
-    // console.log(`Generating ${numberOfQuestions} questions for the topic: ${topic}`);
-    // console.log(`Using model: ${questionMaker.model}`);
-    const response = await client.chat.completions.create({
-    model: questionMaker.model,
-    messages: [
-        { 
-            role: "system", 
-            content:`You are a helpful assistant that generates questions and answers. 
-                    Always respond with valid JSON only, no markdown formatting or code blocks.
-                    You are an expert at curating questions which are relevant to the topic and context.
-                    The questions you make have specific answers and specific negative answers instead of being vague and subjective.`
-        },
-        {
-            role: "user",
-            content: `Generate a list of ${numberOfQuestions} questions and answers for the topic: ${topic}
-            . The questions should be based on the following context: ${data} 
-            Description of the questions should be like: ${description},
-            
-            Respond with a JSON object matching this schema:
-            {
-                "questions": [
-                    {
-                    "question": "string",
-                    "answers": ["string"],
-                    "negative_answers": ["string"]
-                    }
-                ]
-            }`,
-        },
-    ],
-    response_format: { type: "json_schema", json_schema: zodTextFormat(Question, "question") },
-    })
-    ;
-
-    const content = response.choices[0]?.message.content ?? "{}";
-    const parsed = JSON.parse(content);
-    const validated = Question.parse(parsed);
-
-    // console.log(validated);
-
+    const validated: question[] = [];
+    let i = 0;
     const outputPath = QUESTION_SET_PATH;
     const outputDir = dirname(outputPath);
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
+    const batchSize = 5;
+
+    for (let j = 0; j < numberOfQuestions; j++) {
+        if (j%batchSize !== 0) continue;
+        console.log("j: ", j);
+        const currentQuestionIndex = Math.floor(Math.random() * data.length);
+        data.splice(currentQuestionIndex, 1);
+        const response = await client.chat.completions.create({
+            model: questionMaker.model,
+            messages: [
+                { 
+                    role: "system", 
+                    content:`You are a helpful assistant that generates questions and answers. 
+                            Always respond with valid JSON only, no markdown formatting or code blocks.
+                            You are an expert at curating questions which are relevant to the topic and context.
+                            The questions you make have specific answers and specific negative answers instead of being vague and subjective.`
+                },
+                {
+                    role: "user",
+                    content: `Generate a **list** of **${batchSize}** question and answers for the topic: ${topic}
+                    . The questions should be based on the following context: ${data[currentQuestionIndex]} 
+                    Description of the questions should be like: ${description},
+                    
+                    Respond with a JSON object matching this schema:
+                    {
+                        "questions": [
+                            {
+                            "question": "string",
+                            "answers": ["string"],
+                            "negative_answers": ["string"]
+                            }
+                        ]
+                    }`,
+                },
+            ],
+            response_format: { type: "json_schema", json_schema: zodTextFormat(Question, "question") },
+        });
+        const content = response.choices[0]?.message.content ?? "{}";
+        const parsed = JSON.parse(content);
+        const validated_questions = Question.parse(parsed);
+        validated.push(...validated_questions.questions.map(question => ({
+            question: question.question,
+            answers: question.answers,
+            negative_answers: question.negative_answers
+        })));
+        i++;
+        console.log("validated.length: ", validated.length);
+        console.log("validated: ", validated);
+        if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+        fs.writeFileSync(outputPath, JSON.stringify(validated, null, 2));
     }
-    fs.writeFileSync(outputPath, JSON.stringify(validated.questions, null, 2));
-    console.log(`\nSaved ${validated.questions.length} questions to ${outputPath}`);
+    fs.writeFileSync(outputPath, JSON.stringify(validated, null, 2));
+    console.log(`\nSaved ${validated.length} questions to ${outputPath}`);
 }
 
 
 async function parsePDF(pdf_docs: string[]) {
-    var data = "";
+    const data: string[] = [];
     await Promise.all(pdf_docs.map(async (doc) => {
         const parser = new PDFParse({url: DOCS_PATH + "/" + doc});
         const pdf_text = await parser.getText();
-        data += pdf_text.text;
+        data.push(pdf_text.text);
     }));
     return data;
 }
 
 async function parseText(text_docs: string[]) {
-    var data = "";
+    const data: string[] = [];
     await Promise.all(text_docs.map(async (doc) => {
         const text = await Bun.file(DOCS_PATH + "/" + doc).text();
-        data += text;
+        data.push(text);
     }));
     return data;
 }
@@ -112,10 +124,40 @@ async function readDocs() {
 
     const pdf_data = await parsePDF(pdf_docs);
     const text_data = await parseText(text_docs);
-    // console.log("pdf_data.length", pdf_data.length);
-    // console.log("text_data.length", text_data.length);
-    return pdf_data + "\n\n\n" + text_data;
+
+    // we need to return an array of strings and batch them, each batch should make 1 question
+    // taking  the limit of 30,000 tokens or around 1,280,000 characters.
+
+    const batch_size = 1280000;
+    // const batch_size = 100;
+    const new_pdf_data: string[] = [];
+    console.log("pdf_data.length: ", pdf_data.length);
+    pdf_data.forEach((batch) => {
+        if (batch.length > batch_size) {
+            const slices = Math.floor(batch.length / batch_size);
+            for (let i = 0; i < slices; i++) {
+                new_pdf_data.push(batch.slice(i*batch_size, (i+1)*batch_size));
+            }
+        } else {
+            new_pdf_data.push(batch);
+        }
+    });
+    console.log("new_pdf_data.length: ", new_pdf_data.length);
+    const new_text_data: string[] = [];
+    console.log("text_data.length: ", text_data.length);
+    text_data.forEach((batch) => {
+        if (batch.length > batch_size) {
+            const slices = Math.floor(batch.length / batch_size);
+            for (let i = 0; i < slices; i++) {
+                new_text_data.push(batch.slice(i*batch_size, (i+1)*batch_size));
+            }
+        } else {
+            new_text_data.push(batch);
+        }
+    });
+    console.log("new_text_data.length: ", new_text_data.length);
+    return [...new_pdf_data, ...new_text_data];
 }
 
-// const data = await readDocs();
+MakeQuestions("one piece", 15, "Questions about the anime One Piece");
 

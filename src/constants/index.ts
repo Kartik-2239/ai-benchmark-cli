@@ -1,7 +1,6 @@
 import type { model } from "../types"
 
 export const QUESTION_SET_PATH = "./questions/one_piece.json";
-// export const TOPIC = "AI";
 export const BASE_URL = "https://api.tokenfactory.nebius.com/v1/";
 // export const BASE_URL = "https://openrouter.ai/api/v1";
 export const DOCS_PATH = "./docs";

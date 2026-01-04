@@ -57,3 +57,9 @@ bun run start --create
 - **Questions**: edit/add `questions/test.json`
 - **Logs**: written to `logs/<model-name>.log`
 
+
+
+## TO-DOs
+ - [ ] Add Rag for docs
+ - [ ] Better caching
+ - [ ] Image gen benchmarks
