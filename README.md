@@ -60,6 +60,5 @@ bun run start --create
 
 
 ## TO-DOs
- - [ ] Add Rag for docs
  - [ ] Better caching
- - [ ] Image gen benchmarks
+ - [ ] Image gen benchmarks (can't test it)
