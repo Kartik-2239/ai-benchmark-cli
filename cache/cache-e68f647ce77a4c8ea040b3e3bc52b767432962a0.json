@@ -1,0 +1,457 @@
+{
+  "cacheVersion": 1,
+  "questionSetId": "./questions/luffy-dataset.json",
+  "questionSetHash": "e68f647ce77a4c8ea040b3e3bc52b767432962a0",
+  "entries": {
+    "gpt-oss-120b::bf679a98636d5411": {
+      "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+      "answers": [
+        "Gomu Gomu no Mi"
+      ],
+      "negative_answers": [
+        "Bara Bara no Mi",
+        "Mera Mera no Mi",
+        "Suna Suna no Mi"
+      ],
+      "answer": "Luffy ate the **Gomu Gomu no Mi** (the Rubber‑Rubber Fruit).",
+      "input_tokens": 93,
+      "output_tokens": 209,
+      "cost": 0.00013934999999999997,
+      "time_taken": 1772.6249999999998,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:09:57.357Z"
+    },
+    "gpt-oss-120b::fd19f5d7f34ebd22": {
+      "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+      "answers": [
+        "Left arm"
+      ],
+      "negative_answers": [
+        "Right arm",
+        "Both arms",
+        "His leg"
+      ],
+      "answer": "Shanks lost his left arm while protecting Luffy from the Sea King.",
+      "input_tokens": 90,
+      "output_tokens": 204,
+      "cost": 0.0001359,
+      "time_taken": 1552.3999999999996,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:09:59.268Z"
+    },
+    "gpt-oss-120b::2b323303d487cbe4": {
+      "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+      "answers": [
+        "His straw hat"
+      ],
+      "negative_answers": [
+        "His sword",
+        "A treasure map",
+        "His ship"
+      ],
+      "answer": "Shanks gave Luffy his straw hat, telling him to return it once he becomes a great pirate.",
+      "input_tokens": 101,
+      "output_tokens": 106,
+      "cost": 0.00007875,
+      "time_taken": 876.3219170000002,
+      "evaluationScore": 95,
+      "timestamp": "2026-01-06T08:10:00.704Z"
+    },
+    "gpt-oss-120b::150d366611aa6354": {
+      "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+      "answers": [
+        "Stabs himself with a knife under his eye"
+      ],
+      "negative_answers": [
+        "Jumps off the ship's figurehead",
+        "Fights a sea monster",
+        "Breaks a sake bottle over his head"
+      ],
+      "answer": "He knocked the bear‑like pirate Higuma out cold in a fist‑to‑fist brawl, proving his toughness and ending up getting patched up at the Party’s Bar.",
+      "input_tokens": 104,
+      "output_tokens": 576,
+      "cost": 0.00036119999999999994,
+      "time_taken": 2954.4572080000016,
+      "evaluationScore": 0,
+      "timestamp": "2026-01-06T08:10:22.398Z"
+    },
+    "gpt-oss-120b::9e2a5b427c9fbb4d": {
+      "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+      "answers": [
+        "Higuma"
+      ],
+      "negative_answers": [
+        "Jango",
+        "Kuro",
+        "Alvida"
+      ],
+      "answer": "The bandit leader who bullies Shanks and his crew at the Party’s Bar is named Kuro.",
+      "input_tokens": 98,
+      "output_tokens": 1234,
+      "cost": 0.0007551,
+      "time_taken": 10048.812375,
+      "evaluationScore": 0,
+      "timestamp": "2026-01-06T08:11:47.326Z"
+    },
+    "Kimi-K2-Instruct::bf679a98636d5411": {
+      "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+      "answers": [
+        "Gomu Gomu no Mi"
+      ],
+      "negative_answers": [
+        "Bara Bara no Mi",
+        "Mera Mera no Mi",
+        "Suna Suna no Mi"
+      ],
+      "answer": "At Partys Bar, Luffy ate the Gomu Gomu no Mi.",
+      "input_tokens": 40,
+      "output_tokens": 19,
+      "cost": 0.00006560000000000001,
+      "time_taken": 1090.3366670000014,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:49.030Z"
+    },
+    "Kimi-K2-Instruct::fd19f5d7f34ebd22": {
+      "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+      "answers": [
+        "Left arm"
+      ],
+      "negative_answers": [
+        "Right arm",
+        "Both arms",
+        "His leg"
+      ],
+      "answer": "Shanks lost his left arm while saving Luffy from the Sea King.",
+      "input_tokens": 37,
+      "output_tokens": 16,
+      "cost": 0.0000569,
+      "time_taken": 468.03070800000023,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:49.953Z"
+    },
+    "Kimi-K2-Instruct::2b323303d487cbe4": {
+      "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+      "answers": [
+        "His straw hat"
+      ],
+      "negative_answers": [
+        "His sword",
+        "A treasure map",
+        "His ship"
+      ],
+      "answer": "Shanks gave Luffy his treasured straw hat, telling him to return it once he becomes a great pirate.",
+      "input_tokens": 49,
+      "output_tokens": 23,
+      "cost": 0.00007969999999999999,
+      "time_taken": 697.3095420000009,
+      "evaluationScore": 95,
+      "timestamp": "2026-01-06T08:11:51.043Z"
+    },
+    "Kimi-K2-Instruct::150d366611aa6354": {
+      "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+      "answers": [
+        "Stabs himself with a knife under his eye"
+      ],
+      "negative_answers": [
+        "Jumps off the ship's figurehead",
+        "Fights a sea monster",
+        "Breaks a sake bottle over his head"
+      ],
+      "answer": "To prove his toughness, Luffy stabbed himself under the left eye with a dagger, leaving the scar that sent him to Partys Bar for patching-up.",
+      "input_tokens": 51,
+      "output_tokens": 33,
+      "cost": 0.0001047,
+      "time_taken": 1002.5578329999989,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:52.427Z"
+    },
+    "Kimi-K2-Instruct::9e2a5b427c9fbb4d": {
+      "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+      "answers": [
+        "Higuma"
+      ],
+      "negative_answers": [
+        "Jango",
+        "Kuro",
+        "Alvida"
+      ],
+      "answer": "The bandit leader who bullies Shanks and his crew at the Partys Bar is Higuma.",
+      "input_tokens": 45,
+      "output_tokens": 23,
+      "cost": 0.00007769999999999999,
+      "time_taken": 558.3871249999993,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:53.374Z"
+    },
+    "Kimi-K2-Thinking::bf679a98636d5411": {
+      "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+      "answers": [
+        "Gomu Gomu no Mi"
+      ],
+      "negative_answers": [
+        "Bara Bara no Mi",
+        "Mera Mera no Mi",
+        "Suna Suna no Mi"
+      ],
+      "answer": " Luffy ate the Gomu Gomu no Mi (Gum-Gum Fruit) at Partys Bar.",
+      "input_tokens": 49,
+      "output_tokens": 273,
+      "cost": 0.0007118999999999999,
+      "time_taken": 2996.514207999997,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:57.081Z"
+    },
+    "Kimi-K2-Thinking::fd19f5d7f34ebd22": {
+      "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+      "answers": [
+        "Left arm"
+      ],
+      "negative_answers": [
+        "Right arm",
+        "Both arms",
+        "His leg"
+      ],
+      "answer": " Shanks lost his left arm while saving Luffy from the Sea King.",
+      "input_tokens": 46,
+      "output_tokens": 129,
+      "cost": 0.0003501,
+      "time_taken": 1524.5346250000002,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:11:58.976Z"
+    },
+    "Kimi-K2-Thinking::2b323303d487cbe4": {
+      "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+      "answers": [
+        "His straw hat"
+      ],
+      "negative_answers": [
+        "His sword",
+        "A treasure map",
+        "His ship"
+      ],
+      "answer": " Shanks gave Luffy his straw hat, telling him to return it once he becomes a great pirate.",
+      "input_tokens": 58,
+      "output_tokens": 187,
+      "cost": 0.0005023,
+      "time_taken": 2214.9317499999997,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:01.584Z"
+    },
+    "Kimi-K2-Thinking::150d366611aa6354": {
+      "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+      "answers": [
+        "Stabs himself with a knife under his eye"
+      ],
+      "negative_answers": [
+        "Jumps off the ship's figurehead",
+        "Fights a sea monster",
+        "Breaks a sake bottle over his head"
+      ],
+      "answer": " To prove his toughness to Shanks' crew, Luffy stabbed himself under his left eye with a knife, requiring him to be patched up at Partys Bar.",
+      "input_tokens": 60,
+      "output_tokens": 329,
+      "cost": 0.0008585,
+      "time_taken": 3506.4293749999997,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:05.517Z"
+    },
+    "Kimi-K2-Thinking::9e2a5b427c9fbb4d": {
+      "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+      "answers": [
+        "Higuma"
+      ],
+      "negative_answers": [
+        "Jango",
+        "Kuro",
+        "Alvida"
+      ],
+      "answer": " The bandit leader who bullies Shanks and his crew at Partys Bar is Higuma.",
+      "input_tokens": 54,
+      "output_tokens": 273,
+      "cost": 0.0007149,
+      "time_taken": 2997.6472079999985,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:08.947Z"
+    },
+    "Hermes-4-405B::bf679a98636d5411": {
+      "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+      "answers": [
+        "Gomu Gomu no Mi"
+      ],
+      "negative_answers": [
+        "Bara Bara no Mi",
+        "Mera Mera no Mi",
+        "Suna Suna no Mi"
+      ],
+      "answer": "Luffy ate the Gomu Gomu no Mi Devil Fruit at the Partys Bar.",
+      "input_tokens": 48,
+      "output_tokens": 19,
+      "cost": 0.000105,
+      "time_taken": 749.9491669999989,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:10.107Z"
+    },
+    "Hermes-4-405B::fd19f5d7f34ebd22": {
+      "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+      "answers": [
+        "Left arm"
+      ],
+      "negative_answers": [
+        "Right arm",
+        "Both arms",
+        "His leg"
+      ],
+      "answer": "Shanks lost his left arm while saving Luffy from the Sea King.",
+      "input_tokens": 45,
+      "output_tokens": 16,
+      "cost": 0.00009300000000000001,
+      "time_taken": 653.5436659999978,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:11.314Z"
+    },
+    "Hermes-4-405B::2b323303d487cbe4": {
+      "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+      "answers": [
+        "His straw hat"
+      ],
+      "negative_answers": [
+        "His sword",
+        "A treasure map",
+        "His ship"
+      ],
+      "answer": "Shanks gave Luffy his straw hat before leaving Foosha Village, telling him to return it when he becomes a great pirate.",
+      "input_tokens": 57,
+      "output_tokens": 28,
+      "cost": 0.000141,
+      "time_taken": 1064.6061659999978,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:12.797Z"
+    },
+    "Hermes-4-405B::150d366611aa6354": {
+      "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+      "answers": [
+        "Stabs himself with a knife under his eye"
+      ],
+      "negative_answers": [
+        "Jumps off the ship's figurehead",
+        "Fights a sea monster",
+        "Breaks a sake bottle over his head"
+      ],
+      "answer": "Luffy proved his toughness to be a pirate by stabbing a needle through his own eye, which led to him being patched up at the Partys Bar.",
+      "input_tokens": 59,
+      "output_tokens": 32,
+      "cost": 0.000155,
+      "time_taken": 1110.0151669999977,
+      "evaluationScore": 85,
+      "timestamp": "2026-01-06T08:12:14.319Z"
+    },
+    "Hermes-4-405B::9e2a5b427c9fbb4d": {
+      "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+      "answers": [
+        "Higuma"
+      ],
+      "negative_answers": [
+        "Jango",
+        "Kuro",
+        "Alvida"
+      ],
+      "answer": "The bandit leader who bullies Shanks and his crew at the Partys Bar is named Unnamed Bandit Leader.",
+      "input_tokens": 53,
+      "output_tokens": 26,
+      "cost": 0.00013099999999999999,
+      "time_taken": 904.7518749999945,
+      "evaluationScore": 0,
+      "timestamp": "2026-01-06T08:12:15.599Z"
+    },
+    "GLM-4.5::bf679a98636d5411": {
+      "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+      "answers": [
+        "Gomu Gomu no Mi"
+      ],
+      "negative_answers": [
+        "Bara Bara no Mi",
+        "Mera Mera no Mi",
+        "Suna Suna no Mi"
+      ],
+      "answer": "The Devil Fruit Luffy ate, though he obtained it years before arriving at the Baratie, was the Gomu Gomu no Mi (revealed later to be the Hito Hito no Mi, Model: Nika).",
+      "input_tokens": 29,
+      "output_tokens": 328,
+      "cost": 0.000739,
+      "time_taken": 6740.719333000001,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:22.724Z"
+    },
+    "GLM-4.5::fd19f5d7f34ebd22": {
+      "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+      "answers": [
+        "Left arm"
+      ],
+      "negative_answers": [
+        "Right arm",
+        "Both arms",
+        "His leg"
+      ],
+      "answer": "Shanks lost his left arm while saving Luffy from the Sea King.",
+      "input_tokens": 26,
+      "output_tokens": 210,
+      "cost": 0.00047760000000000006,
+      "time_taken": 4482.637374999998,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:27.750Z"
+    },
+    "GLM-4.5::2b323303d487cbe4": {
+      "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+      "answers": [
+        "His straw hat"
+      ],
+      "negative_answers": [
+        "His sword",
+        "A treasure map",
+        "His ship"
+      ],
+      "answer": "Shanks gave Luffy his Straw Hat, instructing him to return it once he had become a great pirate.",
+      "input_tokens": 38,
+      "output_tokens": 233,
+      "cost": 0.0005354,
+      "time_taken": 4864.202582999998,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:32.987Z"
+    },
+    "GLM-4.5::150d366611aa6354": {
+      "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+      "answers": [
+        "Stabs himself with a knife under his eye"
+      ],
+      "negative_answers": [
+        "Jumps off the ship's figurehead",
+        "Fights a sea monster",
+        "Breaks a sake bottle over his head"
+      ],
+      "answer": "Luffy stabbed himself under the eye with a knife to prove his toughness to Shanks, resulting in him getting patched up by Makino at the Partys Bar.",
+      "input_tokens": 40,
+      "output_tokens": 264,
+      "cost": 0.0006048000000000001,
+      "time_taken": 5821.553082999999,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:39.189Z"
+    },
+    "GLM-4.5::9e2a5b427c9fbb4d": {
+      "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+      "answers": [
+        "Higuma"
+      ],
+      "negative_answers": [
+        "Jango",
+        "Kuro",
+        "Alvida"
+      ],
+      "answer": "The bandit leader who bullies Shanks and his crew at the Partys Bar is Higuma the Bear.",
+      "input_tokens": 34,
+      "output_tokens": 229,
+      "cost": 0.0005242000000000001,
+      "time_taken": 4811.154333999999,
+      "evaluationScore": 100,
+      "timestamp": "2026-01-06T08:12:44.336Z"
+    }
+  }
+}

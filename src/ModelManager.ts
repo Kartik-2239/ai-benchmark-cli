@@ -220,7 +220,7 @@ export async function runTest(questionSetPath: string){
         pending: true
     }))
     
-    run(listStatus)
+    run(listStatus, questionSetPath)
     
     for (let i = 0; i < models.length; i++) {
         const model = models[i]!
@@ -235,7 +235,7 @@ export async function runTest(questionSetPath: string){
         for await (const status of m.runTest()) {
             total_time += status.time_taken;
             listStatus[i] = { ...status, pending: false, time_taken: total_time }
-            run(listStatus)
+            run(listStatus, questionSetPath)
         }
         // listStatus[i] = { ...status, pending: false }
         // run(listStatus)

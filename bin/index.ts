@@ -9,15 +9,29 @@ import React from "react"
 import { QUESTION_SET_DIR, QUESTION_SET_PATH } from "../src/constants"
 
 if (argv[2] === "--help" || argv[2] === "-h" || argv.length === 2){
-    console.log("Welcome to the benchmark-cli")
-    console.log("-----------------------------------------------------------")
-    console.log("Usage:                                                    |")
-    console.log("  --run                      Run benchmark tests          |")
-    console.log("  --create                   Interactive question creator |")
+    console.log(`welcome to ai-benchmark-cli`)
+    console.log(
+  "\x1b[36m" + // cyan
+  "       _        _                     _                          _               _ _ \n" +
+  "      (_)      | |                   | |                        | |             | (_)\n" +
+  "\x1b[34m" + // blue
+  "  __ _ _ ______| |__   ___ _ __   ___| |__  _ __ ___   __ _ _ __| | ________ ___| |_ \n" +
+  " / _` | |______| '_ \\ / _ \\ '_ \\ / __| '_ \\| '_ ` _ \\ / _` | '__| |/ /______/ __| | |\n" +
+  "\x1b[36m" + // cyan
+  "| (_| | |      | |_) |  __/ | | | (__| | | | | | | | | (_| | |  |   <      | (__| | |\n" +
+  " \\__,_|_|      |_.__/ \\___|_| |_|\\___|_| |_|_| |_| |_|\\__,_|_|  |_|\\_\\      \\___|_|_|\n" +
+  "\x1b[0m" // reset
+);
+   
+    
+    console.log(" ----------------------------------------------------------")
+    console.log("| Usage:                                                   |")
+    console.log("|  --run                      Run benchmark tests          |")
+    console.log("|  --create                   Interactive question creator |")
     // console.log("  --create -o                Use own question set         |")
     // console.log("  --create -t <topic>        Set topic                    |")
     // console.log("  --create -n <5-100>        Set number of questions      |")
-    console.log("-----------------------------------------------------------")
+    console.log(" ----------------------------------------------------------")
 }
 
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Box, render, Text } from 'ink';
 import type { currentStatus } from '../types';
-import { QUESTION_SET_PATH } from '../constants/index';
 import fs from 'fs';
 
 const Col = ({ children, width, align, color }: { children: React.ReactNode; width?: number; align?: 'flex-start' | 'center' | 'flex-end'; color?: 'cyan' | 'green' | 'red' | 'yellow' | 'blue' | 'magenta' | 'white' | 'black' | 'gray' | 'grey' | 'purple' | 'pink' | 'brown' | 'orange' | 'teal' | 'lime' | 'indigo' | 'violet' | 'maroon' | 'navy' | 'olive' | 'coral' | 'salmon' | 'turquoise' | 'gold' | 'silver' | 'bronze' | 'indigo' | 'purple' | 'pink' | 'brown' | 'orange' | 'teal' | 'lime' | 'indigo' | 'violet' | 'maroon' | 'navy' | 'olive' | 'coral' | 'salmon' | 'turquoise' | 'gold' | 'silver' | 'bronze' }) => (
@@ -10,8 +9,8 @@ const Col = ({ children, width, align, color }: { children: React.ReactNode; wid
   </Box>
 );
 
-export const TableProvider = ({ models }: { models: currentStatus[] }) => {
-  const q = JSON.parse(fs.readFileSync(QUESTION_SET_PATH, "utf8"))
+export const TableProvider = ({ models, questionSetPath }: { models: currentStatus[], questionSetPath: string }) => {
+  const q = JSON.parse(fs.readFileSync(questionSetPath, "utf8"))
   return (
     <Box flexDirection="column" padding={1}>
       <Box width={90} paddingX={1} marginBottom={1} borderStyle="round" flexDirection="column" gap={0} borderColor="cyan">
@@ -68,8 +67,8 @@ export const TableProvider = ({ models }: { models: currentStatus[] }) => {
 
 
 
-function run(models: currentStatus[]){
-  render(<TableProvider models={models}/>)
+function run(models: currentStatus[], questionSetPath: string){
+  render(<TableProvider models={models} questionSetPath={questionSetPath}/>)
 }
 export default run;
 

@@ -1,0 +1,57 @@
+[
+  {
+    "question": "What is the name of the Devil Fruit that Luffy ate at the Partys Bar?",
+    "answers": [
+      "Gomu Gomu no Mi"
+    ],
+    "negative_answers": [
+      "Bara Bara no Mi",
+      "Mera Mera no Mi",
+      "Suna Suna no Mi"
+    ]
+  },
+  {
+    "question": "Which arm did Shanks lose while saving Luffy from the Sea King?",
+    "answers": [
+      "Left arm"
+    ],
+    "negative_answers": [
+      "Right arm",
+      "Both arms",
+      "His leg"
+    ]
+  },
+  {
+    "question": "What item did Shanks give Luffy before leaving Foosha Village, telling him to return it when he becomes a great pirate?",
+    "answers": [
+      "His straw hat"
+    ],
+    "negative_answers": [
+      "His sword",
+      "A treasure map",
+      "His ship"
+    ]
+  },
+  {
+    "question": "What did Luffy do to prove he was tough enough to be a pirate, which resulted in him being patched up at the Partys Bar?",
+    "answers": [
+      "Stabs himself with a knife under his eye"
+    ],
+    "negative_answers": [
+      "Jumps off the ship's figurehead",
+      "Fights a sea monster",
+      "Breaks a sake bottle over his head"
+    ]
+  },
+  {
+    "question": "What is the name of the bandit leader who bullies Shanks and his crew at the Partys Bar?",
+    "answers": [
+      "Higuma"
+    ],
+    "negative_answers": [
+      "Jango",
+      "Kuro",
+      "Alvida"
+    ]
+  }
+]
