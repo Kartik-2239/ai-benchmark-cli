@@ -7,20 +7,17 @@ import { DOCS_PATH } from "./constants/index.ts";
 import { PDFParse } from 'pdf-parse';
 import { zodTextFormat } from "openai/helpers/zod.js";
 import type { question } from "./types/index.ts";
+import { xdescribe } from "bun:test";
 
 
 
-export async function MakeQuestions(topic?: string, numberOfQuestions?: number, description?: string){
-    if (fs.existsSync(QUESTION_SET_PATH)){
-        console.log("Question set already exists");
-        return;
-    }
+export async function MakeQuestions(topic: string, questionSetPath: string, numberOfQuestions?: number, description?: string){
+    // if (fs.existsSync(questionSetPath)){
+    //     console.log("Question set already exists");
+    //     return;
+    // }
     if (!numberOfQuestions){
         numberOfQuestions = 20;
-    }
-    if (!QUESTION_SET_PATH) {
-        console.error("QUESTION_SET_PATH is not set");
-        process.exit(1);
     }
 
     const client = new OpenAI({
@@ -35,10 +32,10 @@ export async function MakeQuestions(topic?: string, numberOfQuestions?: number, 
             negative_answers: z.array(z.string().describe("A negative answer to the question.")),
         }))
     });
-    const data = await readDocs();
+    const data = await readDocs(description || "");
     const validated: question[] = [];
     let i = 0;
-    const outputPath = QUESTION_SET_PATH;
+    const outputPath = questionSetPath;
     const outputDir = dirname(outputPath);
     const batchSize = 5;
 
@@ -117,7 +114,7 @@ async function parseText(text_docs: string[]) {
     return data;
 }
 
-async function readDocs() {
+async function readDocs(description: string) {
     const docs = fs.readdirSync(DOCS_PATH);
     const text_docs = docs.filter(doc => doc.endsWith(".txt") );
     const pdf_docs = docs.filter(doc => doc.endsWith(".pdf"));
@@ -131,33 +128,38 @@ async function readDocs() {
     const batch_size = 1280000;
     // const batch_size = 100;
     const new_pdf_data: string[] = [];
-    console.log("pdf_data.length: ", pdf_data.length);
     pdf_data.forEach((batch) => {
         if (batch.length > batch_size) {
             const slices = Math.floor(batch.length / batch_size);
             for (let i = 0; i < slices; i++) {
-                new_pdf_data.push(batch.slice(i*batch_size, (i+1)*batch_size));
+                description.split(" ").forEach(word => {
+                    batch.slice(i*batch_size, (i+1)*batch_size).includes(word) ? new_pdf_data.push(batch.slice(i*batch_size, (i+1)*batch_size)) : null;
+                })
             }
         } else {
-            new_pdf_data.push(batch);
+            description.split(" ").forEach(word => {
+                batch.includes(word) ? new_pdf_data.push(batch) : null;
+            })
         }
     });
-    console.log("new_pdf_data.length: ", new_pdf_data.length);
     const new_text_data: string[] = [];
-    console.log("text_data.length: ", text_data.length);
     text_data.forEach((batch) => {
         if (batch.length > batch_size) {
             const slices = Math.floor(batch.length / batch_size);
             for (let i = 0; i < slices; i++) {
-                new_text_data.push(batch.slice(i*batch_size, (i+1)*batch_size));
+                description.split(" ").forEach(word => {
+                    batch.slice(i*batch_size, (i+1)*batch_size).includes(word) ? new_text_data.push(batch.slice(i*batch_size, (i+1)*batch_size)) : null;
+                })
             }
         } else {
-            new_text_data.push(batch);
+            description.split(" ").forEach(word => {
+                batch.includes(word) ? new_text_data.push(batch) : null;
+            })
         }
     });
-    console.log("new_text_data.length: ", new_text_data.length);
+    if (new_pdf_data.length === 0 && new_text_data.length === 0){
+        return [...pdf_data, ...text_data];
+    }
     return [...new_pdf_data, ...new_text_data];
 }
-
-MakeQuestions("one piece", 15, "Questions about the anime One Piece");
 

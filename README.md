@@ -62,3 +62,5 @@ bun run start --create
 ## TO-DOs
  - [ ] Better caching
  - [ ] Image gen benchmarks (can't test it)
+ - [ ] add options to run benchmark from available quesitons and do caching from that
+ - [ ] ask for question path in makeQuestion

@@ -1,7 +1,12 @@
 import { runTest } from "../src/ModelManager"
 import { MakeQuestions } from "../src/MakeQuestions"
+import fs from "fs"
 import readline from "readline"
 import { argv } from "process"
+import { QuestionsSelector } from "../src/components/QuestionsSelector"
+import { render } from "ink"
+import React from "react"
+import { QUESTION_SET_DIR, QUESTION_SET_PATH } from "../src/constants"
 
 if (argv[2] === "--help" || argv[2] === "-h" || argv.length === 2){
     console.log("Welcome to the benchmark-cli")
@@ -17,8 +22,23 @@ if (argv[2] === "--help" || argv[2] === "-h" || argv.length === 2){
 
 
 if (argv[2] === "--run"){
-    await runTest();
-    process.exit(0);
+    let curPath = "";
+    const questionSetPaths = fs.readdirSync(QUESTION_SET_DIR);
+    if (questionSetPaths.length === 0){
+        console.log("No question sets found");
+        process.exit(0);
+    }
+    const setPath = async (path: string) => {
+        questionSelector.unmount();
+        questionSelector.clear();
+        curPath = QUESTION_SET_DIR + "/" + path;
+        console.log("Current path: ", curPath);
+        console.log("Running test on: ", path);
+    }
+    const questionSelector = render(React.createElement(QuestionsSelector, { questionPath: questionSetPaths, setPath: setPath }))
+    await questionSelector.waitUntilExit()
+    runTest(curPath);
+    // process.exit(0);
 }
 
 if (argv[2] === "--create"){
@@ -27,7 +47,7 @@ if (argv[2] === "--create"){
         output: process.stdout,
     })
 
-    rl.question("Enter the topic (put some text files in docs/ for better quality): ", async (topic) => {
+    rl.question("Enter the name (put some text files in docs/ for better quality): ", async (topic) => {
         if (topic.trim().length < 3){
             console.log("Topic must be at least 3 characters long");
             rl.close();
@@ -46,10 +66,15 @@ if (argv[2] === "--create"){
                 return;
             }
             rl.question("Enter a description for the questions (optional, press enter to skip): ", async (description) => {
-                console.log(`Creating ${num} questions about "${topic}"...`);
-                await MakeQuestions(topic, num, description || undefined);
-                console.log("\nQuestion set created! Run --run to start the benchmark.");
-                rl.close();
+                await MakeQuestions(topic, QUESTION_SET_DIR + "/" + topic + ".json", num, description || undefined);
+                // console.log(`Select a question set to use:`)
+                // const questionSetPaths = fs.readdirSync(QUESTION_SET_DIR);
+                // const setPath = async (path: string) => {
+                //     // await MakeQuestions(topic, num, description || undefined, path || undefined);
+                //     questionSelector.unmount();
+                //     questionSelector.clear();
+                // }
+                // const questionSelector = render(React.createElement(QuestionsSelector, { questionPath: questionSetPaths, setPath: setPath }))
             })
         })
     })
