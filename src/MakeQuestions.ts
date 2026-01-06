@@ -1,4 +1,4 @@
-import { BASE_URL, QUESTION_SET_PATH, questionMaker } from "./constants/index.ts"
+import { BASE_URL, questionMaker } from "./constants/index.ts"
 import { OpenAI } from "openai/client.js";
 import { z } from "zod";
 import fs from 'fs';

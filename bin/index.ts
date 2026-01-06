@@ -6,7 +6,7 @@ import { argv } from "process"
 import { QuestionsSelector } from "../src/components/QuestionsSelector"
 import { render } from "ink"
 import React from "react"
-import { QUESTION_SET_DIR, QUESTION_SET_PATH } from "../src/constants"
+import { QUESTION_SET_DIR } from "../src/constants"
 
 if (argv[2] === "--help" || argv[2] === "-h" || argv.length === 2){
     console.log(`welcome to ai-benchmark-cli`)
